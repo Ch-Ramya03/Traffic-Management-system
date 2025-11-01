@@ -1,0 +1,40 @@
+from collections import deque
+class Vehicle:
+    def __init__(self, license_plate, location, is_emergency_vehicle):
+        self.license_plate = license_plate
+        self.location = location
+        self.is_emergency_vehicle = is_emergency_vehicle
+
+# Traffic Management System class
+class TrafficManagementSystem:
+    def __init__(self):
+        self.traffic_queue = deque()
+
+    def add_vehicle_to_queue(self, vehicle):
+        self.traffic_queue.append(vehicle)
+        print(f"Vehicle {vehicle.license_plate} added to the traffic queue.")
+
+    def manage_traffic(self):
+        while self.traffic_queue:
+            current_vehicle = self.traffic_queue.popleft()
+            if current_vehicle.is_emergency_vehicle:
+                print(f"Emergency vehicle {current_vehicle.license_plate} is given priority.")
+                # Additional emergency routing logic can go here
+            else:
+                print(f"Managing traffic for vehicle {current_vehicle.license_plate}")
+                # Regular traffic management logic here
+
+
+# Main function
+if __name__ == "__main__":
+    traffic_system = TrafficManagementSystem()
+
+    # Simulate adding vehicles
+    vehicle1 = Vehicle("ABC123", "Location1", False)
+    vehicle2 = Vehicle("XYZ789", "Location2", True)
+
+    traffic_system.add_vehicle_to_queue(vehicle1)
+    traffic_system.add_vehicle_to_queue(vehicle2)
+
+    # Simulate traffic management
+    traffic_system.manage_traffic()
